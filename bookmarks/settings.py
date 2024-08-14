@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-#9^szrz%xzt+m$be$916kfu*#uz7)-l0q69ttss1js#ib32rc-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['mysite.com', 'localhost', '127.0.0.1']
 
 
 # Application definition
@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'social_django',
+    'django_extensions',
 ]
 
 MIDDLEWARE = [
@@ -131,16 +133,34 @@ LOGOUT_URL = 'logout'
 # Email server configuration 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-'''EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'amakondisamuel@gmail.com'
-EMAIL_HOST_PASSWORD ='swlr lyfx xkmn bhhd'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True'''
-
 MEDIA_URL = 'media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
     'account.authentication.EmailAuthBackend',
+    'social_core.backends.facebook.FacebookOAuth2',
+    'social_core.backends.google.GoogleOAuth2',
+]
+
+SOCIAL_AUTH_FACEBOOK_KEY = '518906967146765'
+SOCIAL_AUTH_FACEBOOK_SECRET = '189a5f129c133f72f8ec7c8df98cbe07'
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '256407911766-lgvqc3khu2b9l5ak745sqjkr43qfqhnv.apps.googleusercontent.com' # Google Client ID
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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' # Google Client Secret
+
+SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
+
+# social Authentication pipeline for creating new sign in profile 
+SOCIAL_AUTH_PIPELINE = [
+    'social_core.pipeline.social_auth.social_details',
+    'social_core.pipeline.social_auth.social_uid',
+    'social_core.pipeline.social_auth.auth_allowed',
+    'social_core.pipeline.social_auth.social_user',
+    'social_core.pipeline.user.get_username',
+    'social_core.pipeline.user.create_user',
+    'account.authentication.create_profile',
+    'social_core.pipeline.social_auth.associate_user',
+    'social_core.pipeline.social_auth.load_extra_data',
+    'social_core.pipeline.user.user_details',
 ]
