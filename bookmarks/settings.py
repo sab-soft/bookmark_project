@@ -143,11 +143,7 @@ AUTHENTICATION_BACKENDS = [
     'social_core.backends.google.GoogleOAuth2',
 ]
 
-SOCIAL_AUTH_FACEBOOK_KEY = '518906967146765'
-SOCIAL_AUTH_FACEBOOK_SECRET = '189a5f129c133f72f8ec7c8df98cbe07'
-
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '256407911766-lgvqc3khu2b9l5ak745sqjkr43qfqhnv.apps.googleusercontent.com' # Google Client ID
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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' # Google Client Secret
+# Secret keys removed 
 
 SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
 
